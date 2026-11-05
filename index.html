@@ -2,14 +2,771 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DGSelf — Demo Coming Soon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DGSelf — AI-Powered Identity &amp; Access Layer for Interoperable 3D Avatars</title>
+  <meta name="description" content="DGSelf is the AI-powered identity and governance layer for interoperable 3D avatars. Manage multiple digital identities across virtual worlds while preserving every creator's creative vision.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;family=Space+Grotesk:wght@700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <img class="bg" src="1.webp" alt="background">
-  <header class="hero">
-    <h1>DEMO COMING SOON</h1>
+  <div class="ambient-bg" aria-hidden="true"></div>
+  <div class="ambient-grid" aria-hidden="true"></div>
+
+  <!-- Top Sticky Navigation -->
+  <nav class="navbar">
+    <div class="container navbar-inner">
+      <a href="#" class="brand-link">
+        <div class="brand-emblem" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <span class="brand-text">DG<span>Self</span></span>
+        <span class="brand-tag">Governance Layer</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#choose-role">Choose Role</a></li>
+        <li><a href="#the-problem">The Problem</a></li>
+        <li><a href="#live-simulator">AI Gatekeeper</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#developers">For Developers</a></li>
+        <li><a href="#pitch-deck">Pitch Deck</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="nav-cache-indicator" title="Unity WebGL Demo is pre-downloading and caching in the background">
+          <span class="status-dot" id="nav-status-dot"></span>
+          <span id="nav-cache-text">Pre-caching Demo...</span>
+        </div>
+        <button type="button" class="btn-nav-demo" id="nav-launch-demo-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Player Demo
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero & Role Selection Portal -->
+  <header class="hero-section">
+    <img class="hero-backdrop-img" src="1.webp" alt="" aria-hidden="true">
+    <div class="container">
+      <div class="hero-header">
+        <div class="eyebrow-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          AI-Powered Identity &amp; Access Layer for Interoperable 3D Avatars
+        </div>
+        <h1 class="hero-title">
+          Carry Your Digital Identity Across Worlds.<br>
+          <span class="gradient-text">Preserve Every Creator’s Vision.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Today, avatars can move between virtual worlds, but creators lack reliable ways to enforce each experience’s style, immersion, and role requirements. <strong>DGSelf</strong> gives users a personal hub to manage multiple avatars and lets developers define structured access rules—evaluating avatars at entry with AI classification and explainable feedback.
+        </p>
+      </div>
+
+      <!-- Choose Who You Are: 2 Card-Style Buttons -->
+      <div id="choose-role">
+        <div class="role-portal-heading">
+          <span class="role-portal-label">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Choose Who You Are to Get Started
+          </span>
+        </div>
+
+        <div class="role-cards-grid">
+          <!-- CARD 1: PLAYER CARD BUTTON (ACTIVE -> LAUNCHES UNITY WEBGL DEMO) -->
+          <button type="button" class="role-card-btn player-card" id="player-card-btn" aria-label="I am a Player — Launch Interactive 3D Unity WebGL Demo">
+            <div>
+              <div class="role-card-top">
+                <span class="role-badge live">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>
+                  Interactive 3D WebGL Demo
+                </span>
+                <span class="preload-status-chip" id="player-cache-chip">Pre-caching...</span>
+              </div>
+
+              <div class="role-visual-banner" aria-hidden="true">
+                <div class="avatar-chips-row">
+                  <div class="avatar-mini-card">
+                    <span class="avatar-mini-icon">🛡️</span>
+                    <span class="avatar-mini-label">Fantasy Knight</span>
+                  </div>
+                  <div class="avatar-mini-card">
+                    <span class="avatar-mini-icon">👩‍🚀</span>
+                    <span class="avatar-mini-label">Sci-Fi Pilot</span>
+                  </div>
+                  <div class="avatar-mini-card">
+                    <span class="avatar-mini-icon">⚡</span>
+                    <span class="avatar-mini-label">Stylized Rebel</span>
+                  </div>
+                  <div class="avatar-mini-card">
+                    <span class="avatar-mini-icon">🧱</span>
+                    <span class="avatar-mini-label">Voxel Hero</span>
+                  </div>
+                </div>
+                <div class="world-orbit-badge">
+                  <span class="orbit-pill">Fantasy World ✓</span>
+                  <span class="orbit-pill">Sci-Fi World ✓</span>
+                  <span class="orbit-pill">Social Hub ✓</span>
+                </div>
+              </div>
+
+              <div class="role-icon-title">
+                <div class="role-icon-box">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="role-card-subtitle">For Gamers, Explorers &amp; Avatar Collectors</div>
+                  <h2 class="role-card-title">I am a Player</h2>
+                </div>
+              </div>
+
+              <p class="role-card-desc">
+                Self-express in 3D environments with your own avatars and explore a wide variety of 3D virtual environments. Manage all your digital identities in one personal hub, switch avatars per world, and receive instant, explainable AI compatibility feedback at entry.
+              </p>
+
+              <ul class="role-feature-list">
+                <li>
+                  <span class="feature-check">✓</span>
+                  <span>Self-express with custom 3D avatars across diverse virtual worlds</span>
+                </li>
+                <li>
+                  <span class="feature-check">✓</span>
+                  <span>Explore multiple 3D environments (Fantasy, Sci-Fi, Stylized &amp; Gaming)</span>
+                </li>
+                <li>
+                  <span class="feature-check">✓</span>
+                  <span>Unified Avatar Hub with instant AI compatibility &amp; explainable feedback</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="card-mini-progress-wrap">
+                <div class="card-mini-progress-header">
+                  <span id="player-mini-label">Background pre-downloading Unity WebGL demo...</span>
+                  <span id="player-mini-pct">0%</span>
+                </div>
+                <div class="card-mini-progress-track">
+                  <div class="card-mini-progress-fill" id="player-mini-bar"></div>
+                </div>
+              </div>
+
+              <div class="role-card-cta">
+                <span>Click to Launch 3D Unity WebGL Demo</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </div>
+            </div>
+          </button>
+
+          <!-- CARD 2: DEVELOPERS CARD BUTTON (INACTIVE / COMING SOON) -->
+          <div class="role-card-btn developer-card" id="developer-card-btn" role="button" aria-disabled="true" tabindex="-1">
+            <div>
+              <div class="role-card-top">
+                <span class="role-badge coming-soon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  Coming Soon
+                </span>
+                <span class="preload-status-chip">Developer Portal Preview</span>
+              </div>
+
+              <div class="role-visual-banner" aria-hidden="true">
+                <div class="dev-rules-preview">
+                  <div class="dev-rule-chip">✓ Style: Realistic / Medieval</div>
+                  <div class="dev-rule-chip">✓ Role: Warrior, Mage, Guard</div>
+                  <div class="dev-rule-chip">✓ Form: Humanoid Only</div>
+                  <div class="dev-rule-chip">✓ Filter: No Meme / Cartoon</div>
+                </div>
+              </div>
+
+              <div class="role-icon-title">
+                <div class="role-icon-box">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"/>
+                    <polyline points="8 6 2 12 8 18"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="role-card-subtitle">For World Builders, Studios &amp; UGC Creators</div>
+                  <h2 class="role-card-title">I am a Developer</h2>
+                </div>
+              </div>
+
+              <p class="role-card-desc">
+                Register your specific virtual world with your own custom world rules and avatar style, role, and design requirements. Protect your experience’s visual tone, immersion, and lore integrity with automated AI classification at entry.
+              </p>
+
+              <ul class="role-feature-list">
+                <li>
+                  <span class="feature-check">✓</span>
+                  <span>Register your virtual world &amp; configure structured access rules</span>
+                </li>
+                <li>
+                  <span class="feature-check">✓</span>
+                  <span>Define required avatar style, outfit era, role &amp; fidelity constraints</span>
+                </li>
+                <li>
+                  <span class="feature-check">✓</span>
+                  <span>Enforce compatibility at entry via the cross-engine DGSelf SDK Gateway</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="card-mini-progress-wrap" style="opacity: 0.72;">
+                <div class="card-mini-progress-header">
+                  <span>World Registration &amp; Rule Studio SDK</span>
+                  <span>COMING SOON</span>
+                </div>
+                <div class="card-mini-progress-track">
+                  <div class="card-mini-progress-fill" style="width: 100%; background: rgba(148, 163, 184, 0.25);"></div>
+                </div>
+              </div>
+
+              <div class="role-card-cta">
+                <span>World Registration Portal — Coming Soon</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
+
+  <!-- SECTION 1: THE PROBLEM & INSIGHT -->
+  <section class="section" id="the-problem">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">The Problem &amp; The Insight</span>
+        <h2 class="section-title">Interoperable Avatars Break <span>World Integrity</span></h2>
+        <p class="section-lead">
+          3D virtual worlds and cross-world avatars are exploding, but lack identity constraints. Without an enforcement layer for “what fits,” developers lose creative control and avoid avatar interoperability altogether.
+        </p>
+      </div>
+
+      <div class="problem-grid">
+        <div class="problem-points">
+          <div class="problem-point-card">
+            <div class="problem-point-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+            </div>
+            <div>
+              <h4>Avatars Move Across Virtual Worlds</h4>
+              <p>Technical standards allow users to bring external 3D avatars into new games and social spaces.</p>
+            </div>
+          </div>
+
+          <div class="problem-point-card">
+            <div class="problem-point-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div>
+              <h4>Zero Control Over Style, Role, or Immersion Fit</h4>
+              <p>Cartoon or meme avatars enter realistic, lore-driven worlds (and vice versa), shattering atmosphere.</p>
+            </div>
+          </div>
+
+          <div class="problem-point-card">
+            <div class="problem-point-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div>
+              <h4>Developers Lose Creative Control → Avoid Interoperability</h4>
+              <p>World creators lock down their ecosystems because open avatar imports threaten their artistic direction.</p>
+            </div>
+          </div>
+
+          <div class="problem-warning-banner">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>Interoperability exists technically, but fails socially. The missing layer is governance.</span>
+          </div>
+        </div>
+
+        <div class="mismatch-showcase">
+          <div class="mismatch-card">
+            <div class="mismatch-side">
+              <div class="mismatch-side-tag">Target Experience</div>
+              <h5>🏰 Medieval Fantasy World</h5>
+              <p>Realistic • Immersive • Lore-driven</p>
+            </div>
+            <div class="mismatch-divider">
+              <div class="mismatch-x">✕</div>
+              <span class="mismatch-status">Style Mismatch</span>
+            </div>
+            <div class="mismatch-side">
+              <div class="mismatch-side-tag">Incoming Avatar</div>
+              <h5>🐸 Cartoon Meme Hoodie</h5>
+              <p>Broken Immersion • Tone Violation</p>
+            </div>
+          </div>
+
+          <div class="mismatch-card">
+            <div class="mismatch-side">
+              <div class="mismatch-side-tag">Target Experience</div>
+              <h5>🚀 Sci-Fi Realistic World</h5>
+              <p>High Fidelity • Realistic • Tactical</p>
+            </div>
+            <div class="mismatch-divider">
+              <div class="mismatch-x">✕</div>
+              <span class="mismatch-status">Style Mismatch</span>
+            </div>
+            <div class="mismatch-side">
+              <div class="mismatch-side-tag">Incoming Avatar</div>
+              <h5>🧱 Low-Poly Voxel Crafter</h5>
+              <p>Broken Immersion • Fidelity Clash</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: INTERACTIVE AI GATEKEEPER SIMULATOR -->
+  <section class="section" id="live-simulator">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Interactive Governance Preview</span>
+        <h2 class="section-title">DGSelf Enforces <span>Avatar Compatibility at Entry</span></h2>
+        <p class="section-lead">
+          Test how DGSelf’s Rules Engine, AI Classification, and Explainability Layer evaluate an avatar against a developer’s world constraints in real time.
+        </p>
+      </div>
+
+      <div class="simulator-box">
+        <div class="simulator-grid">
+          <!-- Column 1: User's Avatar Hub -->
+          <div class="sim-col">
+            <div class="sim-col-header">
+              <span>1. Select From Your Avatar Hub</span>
+              <span>USER</span>
+            </div>
+            <div class="sim-option-list">
+              <button type="button" class="sim-btn active" data-sim-avatar="meme">
+                <div>
+                  <div class="sim-btn-title">🐸 Pepe Street Hoodie</div>
+                  <div class="sim-btn-meta">Style: Cartoon / Meme • Casual</div>
+                </div>
+              </button>
+              <button type="button" class="sim-btn" data-sim-avatar="knight">
+                <div>
+                  <div class="sim-btn-title">🛡️ Aethelgard Vanguard</div>
+                  <div class="sim-btn-meta">Style: Realistic • Medieval Warrior</div>
+                </div>
+              </button>
+              <button type="button" class="sim-btn" data-sim-avatar="cyber">
+                <div>
+                  <div class="sim-btn-title">👩‍🚀 Nova-7 Operative</div>
+                  <div class="sim-btn-meta">Style: Realistic • Sci-Fi Pilot</div>
+                </div>
+              </button>
+              <button type="button" class="sim-btn" data-sim-avatar="anime">
+                <div>
+                  <div class="sim-btn-title">⚡ Kiko Starlight</div>
+                  <div class="sim-btn-meta">Style: Stylized / Cel-Shaded • Explorer</div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 2: DGSelf Core Gatekeeper Evaluation -->
+          <div class="sim-col sim-center-gate">
+            <div>
+              <div class="sim-col-header">
+                <span>2. DGSelf Core Evaluation</span>
+                <span>AI + RULES</span>
+              </div>
+              <div id="sim-verdict-badge" class="sim-verdict-badge block">
+                ✕ decision: BLOCK — Access Denied
+              </div>
+              <ul class="sim-checks-list" id="sim-checks-list"></ul>
+            </div>
+
+            <div class="sim-explain-box">
+              <strong>Explainability Layer (Human-Readable Feedback)</strong>
+              <p id="sim-explain-text"></p>
+              <button type="button" id="sim-auto-switch-btn" class="btn-nav-demo" style="margin-top: 0.75rem; width: 100%; justify-content: center;">
+                Switch to Compatible Avatar →
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 3: Target Developer Experience -->
+          <div class="sim-col">
+            <div class="sim-col-header">
+              <span>3. Select Destination World</span>
+              <span>WORLD RULES</span>
+            </div>
+            <div class="sim-option-list">
+              <button type="button" class="sim-btn active" data-sim-world="fantasy">
+                <div>
+                  <div class="sim-btn-title">🏰 Kingdom of Eldoria</div>
+                  <div class="sim-btn-meta">Rules: Realistic • Medieval • Warrior/Mage</div>
+                </div>
+              </button>
+              <button type="button" class="sim-btn" data-sim-world="scifi">
+                <div>
+                  <div class="sim-btn-title">🚀 Orbital Station Helios</div>
+                  <div class="sim-btn-meta">Rules: Realistic • Sci-Fi • Pilot/Engineer</div>
+                </div>
+              </button>
+              <button type="button" class="sim-btn" data-sim-world="social">
+                <div>
+                  <div class="sim-btn-title">🌐 Prism Nexus Plaza</div>
+                  <div class="sim-btn-meta">Rules: Stylized or Realistic • No Meme</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: ARCHITECTURE -->
+  <section class="section" id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">System Architecture</span>
+        <h2 class="section-title">DGSelf Architecture: <span>The Governance Layer</span></h2>
+        <p class="section-lead">
+          Bridging personal multi-avatar management with developer-defined access rules through an AI-powered evaluation and explainability pipeline.
+        </p>
+      </div>
+
+      <div class="arch-columns">
+        <!-- Left: Users -->
+        <div class="arch-panel">
+          <span class="arch-panel-tag">Users</span>
+          <h3>Avatar Hub</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Multiple identities. One unified you.</p>
+          <div class="arch-subcard">
+            <h4>📦 Store Multiple Avatars</h4>
+            <p>Build and keep your realistic, stylized, sci-fi, and fantasy identities in one unified personal hub.</p>
+          </div>
+          <div class="arch-subcard">
+            <h4>🔄 Switch Identity Per World</h4>
+            <p>Choose the right avatar for every experience—matching each world’s lore and aesthetic automatically.</p>
+          </div>
+        </div>
+
+        <!-- Center: DGSelf Core -->
+        <div class="arch-panel core-panel">
+          <span class="arch-panel-tag">DGSelf Core</span>
+          <h3>Enforcing Compatibility at Entry</h3>
+          <div class="arch-subcard">
+            <h4>⛩️ SDK Gateway</h4>
+            <p>Secure entry point for all virtual world and experience access requests.</p>
+          </div>
+          <div class="arch-subcard">
+            <h4>🎛️ Rules Engine</h4>
+            <p>Developer-defined structured rules for visual style, roles, themes, outfits, and access permissions.</p>
+          </div>
+          <div class="arch-subcard">
+            <h4>🧠 AI Classification</h4>
+            <p>Understands 3D avatar attributes, rendering style, proportions, intent, and context using AI.</p>
+          </div>
+          <div class="arch-subcard">
+            <h4>💬 Explainability Layer</h4>
+            <p>Human-readable reasons for entry decisions so users know exactly how to adapt or switch avatars.</p>
+          </div>
+        </div>
+
+        <!-- Right: Experiences -->
+        <div class="arch-panel">
+          <span class="arch-panel-tag">Experiences</span>
+          <h3>Your Worlds. Your Rules.</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">We enforce compatibility automatically.</p>
+          <div class="arch-subcard">
+            <h4>🏰 Game / World A — Fantasy RPG</h4>
+            <p>Tags: <code>Fantasy</code> • <code>Medieval</code> • <code>Roleplay</code></p>
+          </div>
+          <div class="arch-subcard">
+            <h4>🌆 Game / World B — Cyberpunk Sim</h4>
+            <p>Tags: <code>Sci-Fi</code> • <code>Cyberpunk</code> • <code>Realistic</code></p>
+          </div>
+          <div class="arch-subcard">
+            <h4>🛠️ Developer SDK</h4>
+            <p>Easy drop-in integration across Unity, Unreal Engine, and WebGL frameworks.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-pipeline">
+        <div class="pipeline-step">
+          <div class="pipeline-step-num">Step 1 • Evaluate</div>
+          <strong>Avatar + World + Rules</strong>
+          <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem;">AI inspects avatar metadata &amp; visuals against world policy</p>
+        </div>
+        <div class="pipeline-step allow-step">
+          <div class="pipeline-step-num">Step 2A • Allow</div>
+          <strong>Enter World Experience</strong>
+          <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem;">Compatible avatars spawn seamlessly into the 3D world</p>
+        </div>
+        <div class="pipeline-step block-step">
+          <div class="pipeline-step-num">Step 2B • Block</div>
+          <strong>Prevent Mismatched Entry</strong>
+          <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem;">Disruptive or out-of-style avatars are stopped at the gate</p>
+        </div>
+        <div class="pipeline-step explain-step">
+          <div class="pipeline-step-num">Step 3 • Explain</div>
+          <strong>Human-Readable Feedback</strong>
+          <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem;">Explains why &amp; prompts user to pick a fitting avatar</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: DEVELOPER VALUE -->
+  <section class="section" id="developers">
+    <div class="container">
+      <div class="dev-value-grid">
+        <div>
+          <span class="section-tag">Developer Value</span>
+          <h2 class="section-title">Give Creators <span>Control</span> Over Their Worlds</h2>
+          <p class="section-lead" style="margin-bottom: 1.75rem;">
+            You build the world. <strong>DGSelf protects it.</strong> Embrace cross-world avatar interoperability without losing your artistic direction or narrative integrity.
+          </p>
+
+          <div class="problem-points">
+            <div class="problem-point-card">
+              <div class="problem-point-icon">🛡️</div>
+              <div>
+                <h4>Preserve Immersion &amp; Style Consistency</h4>
+                <p>Keep your world looking and feeling right across every player session.</p>
+              </div>
+            </div>
+            <div class="problem-point-card">
+              <div class="problem-point-icon">🚫</div>
+              <div>
+                <h4>Prevent Disruptive Avatar Mismatches</h4>
+                <p>Automatically block meme, cartoon, or out-of-era avatars that break tone or fit.</p>
+              </div>
+            </div>
+            <div class="problem-point-card">
+              <div class="problem-point-icon">⚔️</div>
+              <div>
+                <h4>Define Role-Based Access Rules</h4>
+                <p>Control who can enter specific zones and what character roles they can play.</p>
+              </div>
+            </div>
+            <div class="problem-point-card">
+              <div class="problem-point-icon">📖</div>
+              <div>
+                <h4>Maintain Narrative Integrity</h4>
+                <p>Protect your story, characters, and world-building with zero manual moderation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rules-inspector-card">
+          <div class="inspector-header">
+            <span class="inspector-title">WORLD ACCESS RULES POLICY</span>
+            <span class="role-badge coming-soon">SDK Coming Soon</span>
+          </div>
+
+          <div class="rule-row">
+            <div>
+              <div class="rule-row-label">Allowed Styles</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">Visual shader &amp; proportion classification</div>
+            </div>
+            <div class="rule-row-val">Realistic, Medieval,<br>Dark Fantasy</div>
+          </div>
+
+          <div class="rule-row">
+            <div>
+              <div class="rule-row-label">Allowed Roles</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">Character class &amp; equipment tags</div>
+            </div>
+            <div class="rule-row-val">Warrior, Guard,<br>Villager, Mage</div>
+          </div>
+
+          <div class="rule-row">
+            <div>
+              <div class="rule-row-label">Outfit Requirements</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">AI apparel &amp; era verification</div>
+            </div>
+            <div class="rule-row-val">No modern clothing,<br>No meme / cartoon</div>
+          </div>
+
+          <div class="rule-row" style="margin-bottom: 1.25rem;">
+            <div>
+              <div class="rule-row-label">Access Permission</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">Identity &amp; progression gate</div>
+            </div>
+            <div class="rule-row-val">Level 10+ required,<br>Verified accounts only</div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--cyan-light); padding-top: 0.5rem;">
+            <span>✓ Your rules. Your world.</span>
+            <span>✓ Enforced at entry</span>
+            <span>✓ Consistent across worlds</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: OFFICIAL PITCH DECK SHOWCASE -->
+  <section class="section" id="pitch-deck">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Pitch Deck</span>
+        <h2 class="section-title">Explore the Full <span>DGSelf Pitch Deck</span></h2>
+        <p class="section-lead">
+          Browse the official presentation slides detailing DGSelf’s vision, problem statement, governance insight, architecture, and developer value.
+        </p>
+      </div>
+
+      <div class="deck-viewer">
+        <div class="deck-stage">
+          <img id="deck-main-img" src="Pitch_Deck/1.webp" alt="Slide 1 / 6 — DGSelf Vision">
+        </div>
+
+        <div class="deck-controls">
+          <div>
+            <h4 id="deck-slide-title" style="font-size: 1.05rem; font-weight: 700;">Slide 1 / 6 — DGSelf Vision</h4>
+            <p id="deck-slide-desc" style="font-size: 0.88rem; color: var(--text-secondary);">
+              AI-powered identity and access layer for interoperable 3D avatars: building governance infrastructure for virtual world identity.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.6rem;">
+            <button type="button" class="deck-nav-btn" id="deck-prev-btn">← Previous</button>
+            <button type="button" class="deck-nav-btn" id="deck-next-btn">Next →</button>
+          </div>
+        </div>
+
+        <div class="deck-thumbs">
+          <button type="button" class="deck-thumb-btn active" data-deck-idx="0" aria-label="View Slide 1">
+            <img src="Pitch_Deck/1.webp" alt="Slide 1 thumbnail">
+          </button>
+          <button type="button" class="deck-thumb-btn" data-deck-idx="1" aria-label="View Slide 2">
+            <img src="Pitch_Deck/2.webp" alt="Slide 2 thumbnail">
+          </button>
+          <button type="button" class="deck-thumb-btn" data-deck-idx="2" aria-label="View Slide 3">
+            <img src="Pitch_Deck/3.webp" alt="Slide 3 thumbnail">
+          </button>
+          <button type="button" class="deck-thumb-btn" data-deck-idx="3" aria-label="View Slide 4">
+            <img src="Pitch_Deck/4.webp" alt="Slide 4 thumbnail">
+          </button>
+          <button type="button" class="deck-thumb-btn" data-deck-idx="4" aria-label="View Slide 5">
+            <img src="Pitch_Deck/5.webp" alt="Slide 5 thumbnail">
+          </button>
+          <button type="button" class="deck-thumb-btn" data-deck-idx="5" aria-label="View Slide 6">
+            <img src="Pitch_Deck/6.webp" alt="Slide 6 thumbnail">
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <div class="brand-emblem" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <span class="brand-text" style="font-size: 1.25rem;">DG<span>Self</span></span>
+        <span class="footer-copy">— AI-Powered Identity &amp; Access Layer for Interoperable 3D Avatars</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button type="button" class="btn-nav-demo" id="footer-launch-demo-btn">
+          Launch 3D Player Demo →
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       HIDDEN / CACHED UNITY WEBGL DEMO STAGE & MODERN LOADING PROGRESS OVERLAY
+       Starts downloading & caching immediately on page load while hidden!
+       ======================================================================== -->
+  <div class="unity-demo-modal" id="unity-demo-modal" aria-hidden="true" role="dialog" aria-label="DGSelf Interactive 3D Unity WebGL Demo">
+    <!-- Top Floating HUD Controls -->
+    <div class="demo-top-hud">
+      <div class="demo-hud-group">
+        <button type="button" class="demo-hud-btn" id="close-demo-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to DGSelf Website
+        </button>
+        <div class="demo-hud-pill">
+          <span class="status-dot ready"></span>
+          <span>DGSelf Player Experience • Unity WebGL</span>
+        </div>
+      </div>
+
+      <div class="demo-hud-group">
+        <button type="button" class="demo-hud-btn" id="fullscreen-demo-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+          Fullscreen
+        </button>
+      </div>
+    </div>
+
+    <!-- Modern Loading Progress Bar Overlay -->
+    <div class="demo-loading-overlay" id="demo-loading-overlay">
+      <div class="loader-card">
+        <div class="loader-orbital" aria-hidden="true">
+          <div class="loader-ring"></div>
+          <div class="loader-ring-inner"></div>
+          <svg class="loader-core-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+
+        <h3 class="loader-title">Launching DGSelf 3D Avatar Hub</h3>
+        <p class="loader-phase" id="loader-phase">Downloading &amp; Caching 3D World Assets...</p>
+
+        <div class="loader-metrics-row">
+          <span class="loader-pct-big" id="loader-pct">0%</span>
+          <span class="loader-bytes-info" id="loader-bytes">Initializing Cache...</span>
+        </div>
+
+        <div class="loader-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+          <div class="loader-progress-fill" id="loader-bar-fill"></div>
+        </div>
+
+        <div class="loader-steps-grid">
+          <div class="loader-step-pill active" id="loader-step-1">1. Core Wasm</div>
+          <div class="loader-step-pill" id="loader-step-2">2. 3D Assets</div>
+          <div class="loader-step-pill" id="loader-step-3">3. Brotli VFS</div>
+          <div class="loader-step-pill" id="loader-step-4">4. Engine Ready</div>
+        </div>
+
+        <div class="loader-tip" id="loader-tip">
+          Tip: DGSelf evaluates avatar style, role, and outfit compatibility at world entry.
+        </div>
+      </div>
+    </div>
+
+    <!-- Preloading & Cached Unity WebGL Demo Iframe -->
+    <div class="unity-iframe-stage">
+      <iframe
+        id="unity-preload-iframe"
+        src="DGSelf-Unity_Demo/index.html?preload=1"
+        title="DGSelf Unity WebGL Interactive Demo"
+        allow="autoplay; fullscreen; gamepad; xr-spatial-tracking"
+      ></iframe>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
