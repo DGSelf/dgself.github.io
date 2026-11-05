@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0
+}
+
+html,
+body {
+  height: 100%
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #fff;
+  background-color: #01040e;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 100vw;
+  max-height: 100vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center top;
+  z-index: -1;
+  pointer-events: none;
+  display: block;
+  background-color: transparent;
+
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, black 5%, black 95%, transparent),
+    linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-composite: source-in;
+
+  mask-image:
+    linear-gradient(to right, transparent, black 5%, black 95%, transparent),
+    linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  mask-composite: intersect;
+}
+
+.hero {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  padding-top: 6vh;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 6vw, 90px);
+  letter-spacing: 0.02em;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255, 255, 255, 0.02), 0 0 10px rgba(0, 200, 255, 1), 0 0 20px rgba(0, 150, 255, 0.8);
+}
+
+@media (max-width:550px) {
+  .hero {
+    padding-top: 2vh;
+  }
+
+  .hero h1 {
+    font-size: 20px;
+  }
+}
