@@ -157,7 +157,7 @@
       if (unityIframe.contentWindow.dgselfUnityState && typeof unityIframe.contentWindow.dgselfUnityState.setActive === 'function') {
         unityIframe.contentWindow.dgselfUnityState.setActive(active);
       }
-    } catch (e) {}
+    } catch (e) { }
   }
 
   function handleProgressUpdate(progress, loadedBytes, totalBytes, ready) {
@@ -205,7 +205,7 @@
       if (st) {
         handleProgressUpdate(st.progress || 0, st.loadedBytes || 0, st.totalBytes || 0, !!st.ready);
       }
-    } catch (e) {}
+    } catch (e) { }
   }, 250);
 
   // Open Player Demo when clicking Player Card or Navbar Launch Button
@@ -259,6 +259,17 @@
     }
   }
 
+  function exitFullscreenIfActive() {
+    var fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+    if (fsEl) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(function () {});
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+  }
+
   function closePlayerDemo() {
     if (!demoModal) return;
     isModalOpen = false;
@@ -266,6 +277,7 @@
       clearInterval(smoothSweepTimer);
       smoothSweepTimer = null;
     }
+    exitFullscreenIfActive();
     document.body.classList.remove('modal-open');
     demoModal.classList.remove('open');
     demoModal.setAttribute('aria-hidden', 'true');
@@ -273,16 +285,17 @@
   }
 
   function toggleDemoFullscreen() {
-    if (unityIframe && unityIframe.contentWindow) {
-      try {
-        unityIframe.contentWindow.postMessage({ type: 'DGSELF_DEMO_FULLSCREEN' }, '*');
-      } catch (e) {}
+    if (!demoModal) return;
+    var fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+    if (!fsEl) {
+      var reqFs = demoModal.requestFullscreen || demoModal.webkitRequestFullscreen;
+      if (reqFs) {
+        Promise.resolve(reqFs.call(demoModal)).catch(function () {});
+      }
+    } else {
+      exitFullscreenIfActive();
     }
-    if (demoModal && demoModal.requestFullscreen && !document.fullscreenElement) {
-      demoModal.requestFullscreen().catch(function () {});
-    } else if (document.exitFullscreen && document.fullscreenElement) {
-      document.exitFullscreen().catch(function () {});
-    }
+    activateIframeAudioAndFocus(true);
   }
 
   // Bind Player Card Button, Navbar Launch Button, and Demo HUD Controls
@@ -396,7 +409,7 @@
       verdictEl.className = 'sim-verdict-badge ' + (allowed ? 'allow' : 'block');
       verdictEl.textContent = allowed
         ? '✓ decision: ALLOW — Enter Experience'
-        : '✕ decision: BLOCK — Access Denied at Entry';
+        : '✕ decision: BLOCK — Access Denied';
     }
 
     if (checksListEl) {
@@ -429,7 +442,7 @@
         switchBtnEl.style.display = 'none';
       } else {
         switchBtnEl.style.display = 'inline-flex';
-        switchBtnEl.textContent = 'Switch to Compatible Avatar (' + simAvatars[world.recommendedAvatar].name + ') →';
+        switchBtnEl.innerHTML = 'Switch to Compatible Avatar<br>(' + simAvatars[world.recommendedAvatar].name + ')';
         switchBtnEl.onclick = function () {
           selectSimAvatar(world.recommendedAvatar);
         };
@@ -488,7 +501,7 @@
     },
     {
       src: 'Pitch_Deck/4.webp',
-      title: 'Slide 4 / 6 — The Solution: Enforcing Avatar Compatibility at Entry',
+      title: 'Slide 4 / 6 — The Solution: Enforcing Avatar Compatibility',
       desc: 'Users store multiple avatars and switch identities per world while Developers define style, role, outfit, and access rules.'
     },
     {
